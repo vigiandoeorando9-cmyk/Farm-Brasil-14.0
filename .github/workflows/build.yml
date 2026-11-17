@@ -9,6 +9,7 @@ jobs:
   build:
     name: Construir Aplicativo
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Baixar código do repositório
@@ -27,9 +28,9 @@ jobs:
         run: |
           if [ -f "./gradlew" ]; then
             chmod +x gradlew
-            ./gradlew assembleDebug
+            ./gradlew assembleDebug --no-daemon --stacktrace
           else
-            gradle assembleDebug
+            gradle assembleDebug --no-daemon --stacktrace
           fi
 
       - name: Disponibilizar APK para Download
